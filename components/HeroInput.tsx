@@ -101,6 +101,20 @@ export default function HeroInput({ onSubmit, loading }: HeroInputProps) {
               setUrl(e.target.value);
               if (validationError) setValidationError(null);
             }}
+            onPaste={(e) => {
+              const pasted = e.clipboardData.getData("text").trim();
+              if (pasted && !/^https?:\/\//i.test(pasted)) {
+                e.preventDefault();
+                setUrl("https://" + pasted);
+                if (validationError) setValidationError(null);
+              }
+            }}
+            onBlur={(e) => {
+              const val = e.target.value.trim();
+              if (val && !/^https?:\/\//i.test(val)) {
+                setUrl("https://" + val);
+              }
+            }}
             placeholder="https://yourwebsite.com"
             disabled={loading}
             className="w-full bg-surface border border-yellow-400 rounded-lg pl-12 pr-4 py-4 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 disabled:opacity-50 text-base"
