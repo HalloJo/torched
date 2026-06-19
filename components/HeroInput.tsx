@@ -1,7 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Flame, Link, Loader2, AlertCircle } from "lucide-react";
+
+const BIRTH = new Date("2026-06-19T14:29:43+02:00");
+
+function useUptime() {
+  const [elapsed, setElapsed] = useState<number | null>(null);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setElapsed(Date.now() - BIRTH.getTime()),
+      1000
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  if (elapsed === null) return null;
+
+  const totalSeconds = Math.floor(elapsed / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return { days, hours, minutes, seconds };
+}
 
 interface HeroInputProps {
   onSubmit: (url: string) => void;
@@ -20,6 +44,7 @@ function isValidUrl(value: string): boolean {
 export default function HeroInput({ onSubmit, loading }: HeroInputProps) {
   const [url, setUrl] = useState("");
   const [validationError, setValidationError] = useState<string | null>(null);
+  const uptime = useUptime();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,6 +66,19 @@ export default function HeroInput({ onSubmit, loading }: HeroInputProps) {
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
       <div className="text-center mb-10">
+        {uptime && (
+          <div className="inline-flex px-3 py-1 rounded-2xl border-yellow-400 border items-center gap-2 mb-6 text-xs uppercase tracking-widest text-zinc-300 font-semibold">
+            <span>Alive for</span>
+            {(["days", "hours", "minutes", "seconds"] as const).map((unit) => (
+              <span key={unit} className="flex items-baseline gap-0.5">
+                <span className="text-yellow-400 font-extrabold text-sm tabular-nums">
+                  {String(uptime[unit]).padStart(2, "0")}
+                </span>
+                <span>{unit[0]}</span>
+              </span>
+            ))}
+          </div>
+        )}
         <h1 className="text-5xl sm:text-7xl font-extrabold text-white leading-none tracking-tight mb-4">
           Get your site torched.
         </h1>
