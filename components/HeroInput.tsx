@@ -50,7 +50,10 @@ export default function HeroInput({ onSubmit, loading }: HeroInputProps) {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto"
+      >
         <div className="relative flex-1">
           <Link className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5 pointer-events-none" />
           <input
@@ -91,7 +94,7 @@ export default function HeroInput({ onSubmit, loading }: HeroInputProps) {
         </div>
       )}
 
-      <p className="text-center text-zinc-600 text-sm mt-4">
+      <p className="text-center text-zinc-400 text-sm mt-4">
         Works on any public website. No login needed.
       </p>
 
