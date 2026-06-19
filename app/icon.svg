@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background with rounded corners -->
+  <rect width="32" height="32" rx="7" fill="#0A0A0A"/>
+
+  <!-- Outer flame body -->
+  <path
+    d="M16 28C10.5 28 6 24 6 18.5C6 13.5 9.5 9.5 12.5 6C11.5 10 13.5 13 13.5 16C14.5 13 16 9.5 16 4C16 4 26.5 12 26.5 18.5C26.5 24 21.5 28 16 28Z"
+    fill="#FACC15"
+  />
+
+  <!-- Inner flame — brighter core for depth -->
+  <path
+    d="M16 25.5C14.2 25.5 13 24 13 22.5C13 20.5 14 19 15 17.5C15 19.5 16 21 16 22.5C16 21 17 19.5 17.5 17.5C18.5 19 19 20.5 19 22.5C19 24 17.8 25.5 16 25.5Z"
+    fill="#FEF08A"
+  />
+</svg>
